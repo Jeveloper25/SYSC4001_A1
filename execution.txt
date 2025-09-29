@@ -1,0 +1,13 @@
+0, 50, Processing instructions
+50, 1, switch to kernel mode
+51, 10, context saved
+61, 1, find vector 7 in memory position 0x000E
+62, 1, load address 0X00BD into the PC
+63, 152, end of I/O 7: interrupt
+215, 100, Processing instructions
+315, 1, switch to kernel mode
+316, 10, context saved
+326, 1, find vector 12 in memory position 0x0018
+327, 1, load address 0X03B9 into the PC
+328, 145, end of I/O 12: interrupt
+473, 20, Processing instructions
