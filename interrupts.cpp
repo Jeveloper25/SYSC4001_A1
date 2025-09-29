@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
 	uint sys_time;
 	uint duration;
 	std::string type;
-
+	std::string TEST;
     /******************************************************************/
 
     //parse each line of the input trace file
