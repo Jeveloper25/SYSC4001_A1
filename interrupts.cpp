@@ -20,7 +20,9 @@ int main(int argc, char** argv) {
 
     /******************ADD YOUR VARIABLES HERE*************************/
 
-
+	uint sys_time;
+	uint duration;
+	std::string type;
 
     /******************************************************************/
 
