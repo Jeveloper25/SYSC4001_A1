@@ -33,17 +33,19 @@ int main(int argc, char** argv) {
 
         /******************ADD YOUR SIMULATION CODE HERE*************************/
 	if (activity.compare("CPU") == 0) {
-		type = "Processing instructions\n";	
+		type = "CPU Burst\n";	
 		execution += std::to_string(sys_time) + ", " + std::to_string(duration_intr) + ", " + type;
 		sys_time += duration_intr;
 	} else if (activity.compare("SYSCALL") == 0){
 		auto p = intr_boilerplate(sys_time, duration_intr, CONTEXT_TIME, vectors); 
 		execution += std::get<0>(p);
 		sys_time = std::get<1>(p);
+		execution += "N/A, N/A, Placeholder\n";
 	} else if (activity.compare("END_IO") == 0) {
-		type = "end of I/O " + std::to_string(duration_intr) + ": interrupt\n";	
-		execution += std::to_string(sys_time) + ", " + std::to_string(delays[duration_intr]) + ", " + type;
-		sys_time += delays[duration_intr];
+		auto p = intr_boilerplate(sys_time, duration_intr, CONTEXT_TIME, vectors); 
+		execution += std::get<0>(p);
+		sys_time = std::get<1>(p);
+		execution += "N/A, N/A, Placeholder\n";
 	} else {
 		std::cout << "Invalid activity: '" << activity << "' on line " << std::to_string(line_number)+ " of input program." << std::endl;
 	}
