@@ -1,0 +1,61 @@
+0, 75, CPU Burst
+75, 1, switch to kernel mode
+76, 10, context saved
+86, 1, find vector 5 in memory position 0x000A
+87, 1, load address 0X048B into the PC
+N/A, N/A, Placeholder
+88, 84, CPU Burst
+172, 1, switch to kernel mode
+173, 10, context saved
+183, 1, find vector 5 in memory position 0x000A
+184, 1, load address 0X048B into the PC
+N/A, N/A, Placeholder
+185, 22, CPU Burst
+207, 1, switch to kernel mode
+208, 10, context saved
+218, 1, find vector 10 in memory position 0x0014
+219, 1, load address 0X07B0 into the PC
+N/A, N/A, Placeholder
+220, 80, CPU Burst
+300, 1, switch to kernel mode
+301, 10, context saved
+311, 1, find vector 10 in memory position 0x0014
+312, 1, load address 0X07B0 into the PC
+N/A, N/A, Placeholder
+313, 79, CPU Burst
+392, 1, switch to kernel mode
+393, 10, context saved
+403, 1, find vector 6 in memory position 0x000C
+404, 1, load address 0X0639 into the PC
+N/A, N/A, Placeholder
+405, 68, CPU Burst
+473, 1, switch to kernel mode
+474, 10, context saved
+484, 1, find vector 6 in memory position 0x000C
+485, 1, load address 0X0639 into the PC
+N/A, N/A, Placeholder
+486, 71, CPU Burst
+557, 1, switch to kernel mode
+558, 10, context saved
+568, 1, find vector 4 in memory position 0x0008
+569, 1, load address 0X0292 into the PC
+N/A, N/A, Placeholder
+570, 97, CPU Burst
+667, 1, switch to kernel mode
+668, 10, context saved
+678, 1, find vector 4 in memory position 0x0008
+679, 1, load address 0X0292 into the PC
+N/A, N/A, Placeholder
+680, 84, CPU Burst
+764, 1, switch to kernel mode
+765, 10, context saved
+775, 1, find vector 7 in memory position 0x000E
+776, 1, load address 0X00BD into the PC
+N/A, N/A, Placeholder
+777, 38, CPU Burst
+815, 1, switch to kernel mode
+816, 10, context saved
+826, 1, find vector 7 in memory position 0x000E
+827, 1, load address 0X00BD into the PC
+N/A, N/A, Placeholder
+828, 90, CPU Burst

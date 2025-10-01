@@ -6,6 +6,8 @@
  */
 
 #include"interrupts.hpp"
+#include <iterator>
+#include <string>
 
 int main(int argc, char** argv) {
 
@@ -20,8 +22,9 @@ int main(int argc, char** argv) {
 
     /******************ADD YOUR VARIABLES HERE*************************/
 
-
-
+	int sys_time = 0;
+	std::string type;
+	uint line_number = 1;
     /******************************************************************/
 
     //parse each line of the input trace file
@@ -29,9 +32,24 @@ int main(int argc, char** argv) {
         auto [activity, duration_intr] = parse_trace(trace);
 
         /******************ADD YOUR SIMULATION CODE HERE*************************/
-
-
-
+	if (activity.compare("CPU") == 0) {
+		type = "CPU Burst\n";	
+		execution += std::to_string(sys_time) + ", " + std::to_string(duration_intr) + ", " + type;
+		sys_time += duration_intr;
+	} else if (activity.compare("SYSCALL") == 0){
+		auto p = intr_boilerplate(sys_time, duration_intr, CONTEXT_TIME, vectors); 
+		execution += std::get<0>(p);
+		sys_time = std::get<1>(p);
+		execution += "N/A, N/A, Placeholder\n";
+	} else if (activity.compare("END_IO") == 0) {
+		auto p = intr_boilerplate(sys_time, duration_intr, CONTEXT_TIME, vectors); 
+		execution += std::get<0>(p);
+		sys_time = std::get<1>(p);
+		execution += "N/A, N/A, Placeholder\n";
+	} else {
+		std::cout << "Invalid activity: '" << activity << "' on line " << std::to_string(line_number)+ " of input program." << std::endl;
+	}
+	line_number++;
         /************************************************************************/
 
     }
