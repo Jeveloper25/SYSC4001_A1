@@ -26,7 +26,8 @@ int main(int argc, char** argv) {
 
 	int sys_time = 0;
 	std::string type;
-	uint line_number = 1;
+	unsigned int line_number = 1;
+	
     /******************************************************************/
 
     //parse each line of the input trace file
