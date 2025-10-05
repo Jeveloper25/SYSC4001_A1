@@ -6,6 +6,8 @@
  */
 
 #include"interrupts.hpp"
+#include <algorithm>
+#include <cmath>
 #include <iterator>
 #include <string>
 
@@ -37,17 +39,37 @@ int main(int argc, char** argv) {
 		execution += std::to_string(sys_time) + ", " + std::to_string(duration_intr) + ", " + type;
 		sys_time += duration_intr;
 	} else if (activity.compare("SYSCALL") == 0){
+		if (duration_intr >= std::min(delays.size(), vectors.size()) || duration_intr < 0) {
+				std::cout << "Line "<< line_number << "\nInvalid device number: " << duration_intr
+				<< "\nDevice number must be between 0 and " << std::min(delays.size(), vectors.size()) << std::endl;
+		}
 		auto p = intr_boilerplate(sys_time, duration_intr, CONTEXT_TIME, vectors); 
 		execution += std::get<0>(p);
 		sys_time = std::get<1>(p);
-		execution += "N/A, N/A, Placeholder\n";
+		int isr_duration = delays.at(duration_intr);
+		int isr_times[4];
+		isr_times[0] = std::round(isr_duration * 0.1);
+		isr_times[1] = std::round(isr_duration * 0.2);
+		isr_times[2] = std::round(isr_duration * 0.4);
+		isr_times[3] = std::round(isr_duration * 0.3);
+		execution += std::to_string(sys_time) + ", " + std::to_string(isr_times[0]) + ", " + "Check device status\n";
+		sys_time += isr_times[0];
+		execution += std::to_string(sys_time) + ", " + std::to_string(isr_times[1]) + ", " + "Call device driver\n";
+		sys_time += isr_times[1];
+		execution += std::to_string(sys_time) + ", " + std::to_string(isr_times[2]) + ", " + "Initiate DMA transfer\n";
+		sys_time += isr_times[2];
+		execution += std::to_string(sys_time) + ", " + std::to_string(isr_times[3]) + ", " + "Mark device as waiting\n";
+		sys_time += isr_times[3];
+		execution += std::to_string(sys_time) + ", " + std::to_string(1) + ", " + "IRET\n";
+		sys_time++;
 	} else if (activity.compare("END_IO") == 0) {
 		auto p = intr_boilerplate(sys_time, duration_intr, CONTEXT_TIME, vectors); 
 		execution += std::get<0>(p);
 		sys_time = std::get<1>(p);
 		execution += "N/A, N/A, Placeholder\n";
 	} else {
-		std::cout << "Invalid activity: '" << activity << "' on line " << std::to_string(line_number)+ " of input program." << std::endl;
+		std::cout << "Line: " << line_number << "\nInvalid activity: " << activity
+		<< "\nActivity must be one of 'CPU', 'SYSCALL', or 'END_IO." << std::endl;
 	}
 	line_number++;
         /************************************************************************/
@@ -60,3 +82,11 @@ int main(int argc, char** argv) {
 
     return 0;
 }
+
+/*
+* The times are organized as follows:
+* 0: Check device status
+* 1: Call device driver
+* 2: Initiate DMA transfer 
+* 3: Mark device as waiting
+* */

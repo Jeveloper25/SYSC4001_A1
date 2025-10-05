@@ -3,59 +3,79 @@
 76, 10, context saved
 86, 1, find vector 5 in memory position 0x000A
 87, 1, load address 0X048B into the PC
+88, 21, Check device status
+109, 42, Call device driver
+151, 84, Initiate DMA transfer
+235, 63, Mark device as waiting
+298, 1, IRET
+299, 84, CPU Burst
+383, 1, switch to kernel mode
+384, 10, context saved
+394, 1, find vector 5 in memory position 0x000A
+395, 1, load address 0X048B into the PC
 N/A, N/A, Placeholder
-88, 84, CPU Burst
-172, 1, switch to kernel mode
-173, 10, context saved
-183, 1, find vector 5 in memory position 0x000A
-184, 1, load address 0X048B into the PC
+396, 22, CPU Burst
+418, 1, switch to kernel mode
+419, 10, context saved
+429, 1, find vector 10 in memory position 0x0014
+430, 1, load address 0X07B0 into the PC
+431, 56, Check device status
+487, 113, Call device driver
+600, 226, Initiate DMA transfer
+826, 169, Mark device as waiting
+995, 1, IRET
+996, 80, CPU Burst
+1076, 1, switch to kernel mode
+1077, 10, context saved
+1087, 1, find vector 10 in memory position 0x0014
+1088, 1, load address 0X07B0 into the PC
 N/A, N/A, Placeholder
-185, 22, CPU Burst
-207, 1, switch to kernel mode
-208, 10, context saved
-218, 1, find vector 10 in memory position 0x0014
-219, 1, load address 0X07B0 into the PC
+1089, 79, CPU Burst
+1168, 1, switch to kernel mode
+1169, 10, context saved
+1179, 1, find vector 6 in memory position 0x000C
+1180, 1, load address 0X0639 into the PC
+1181, 27, Check device status
+1208, 53, Call device driver
+1261, 106, Initiate DMA transfer
+1367, 80, Mark device as waiting
+1447, 1, IRET
+1448, 68, CPU Burst
+1516, 1, switch to kernel mode
+1517, 10, context saved
+1527, 1, find vector 6 in memory position 0x000C
+1528, 1, load address 0X0639 into the PC
 N/A, N/A, Placeholder
-220, 80, CPU Burst
-300, 1, switch to kernel mode
-301, 10, context saved
-311, 1, find vector 10 in memory position 0x0014
-312, 1, load address 0X07B0 into the PC
+1529, 71, CPU Burst
+1600, 1, switch to kernel mode
+1601, 10, context saved
+1611, 1, find vector 4 in memory position 0x0008
+1612, 1, load address 0X0292 into the PC
+1613, 25, Check device status
+1638, 50, Call device driver
+1688, 100, Initiate DMA transfer
+1788, 75, Mark device as waiting
+1863, 1, IRET
+1864, 97, CPU Burst
+1961, 1, switch to kernel mode
+1962, 10, context saved
+1972, 1, find vector 4 in memory position 0x0008
+1973, 1, load address 0X0292 into the PC
 N/A, N/A, Placeholder
-313, 79, CPU Burst
-392, 1, switch to kernel mode
-393, 10, context saved
-403, 1, find vector 6 in memory position 0x000C
-404, 1, load address 0X0639 into the PC
+1974, 84, CPU Burst
+2058, 1, switch to kernel mode
+2059, 10, context saved
+2069, 1, find vector 7 in memory position 0x000E
+2070, 1, load address 0X00BD into the PC
+2071, 15, Check device status
+2086, 30, Call device driver
+2116, 61, Initiate DMA transfer
+2177, 46, Mark device as waiting
+2223, 1, IRET
+2224, 38, CPU Burst
+2262, 1, switch to kernel mode
+2263, 10, context saved
+2273, 1, find vector 7 in memory position 0x000E
+2274, 1, load address 0X00BD into the PC
 N/A, N/A, Placeholder
-405, 68, CPU Burst
-473, 1, switch to kernel mode
-474, 10, context saved
-484, 1, find vector 6 in memory position 0x000C
-485, 1, load address 0X0639 into the PC
-N/A, N/A, Placeholder
-486, 71, CPU Burst
-557, 1, switch to kernel mode
-558, 10, context saved
-568, 1, find vector 4 in memory position 0x0008
-569, 1, load address 0X0292 into the PC
-N/A, N/A, Placeholder
-570, 97, CPU Burst
-667, 1, switch to kernel mode
-668, 10, context saved
-678, 1, find vector 4 in memory position 0x0008
-679, 1, load address 0X0292 into the PC
-N/A, N/A, Placeholder
-680, 84, CPU Burst
-764, 1, switch to kernel mode
-765, 10, context saved
-775, 1, find vector 7 in memory position 0x000E
-776, 1, load address 0X00BD into the PC
-N/A, N/A, Placeholder
-777, 38, CPU Burst
-815, 1, switch to kernel mode
-816, 10, context saved
-826, 1, find vector 7 in memory position 0x000E
-827, 1, load address 0X00BD into the PC
-N/A, N/A, Placeholder
-828, 90, CPU Burst
+2275, 90, CPU Burst
