@@ -83,11 +83,3 @@ int main(int argc, char** argv) {
 
     return 0;
 }
-
-/*
-* The times are organized as follows:
-* 0: Check device status
-* 1: Call device driver
-* 2: Initiate DMA transfer 
-* 3: Mark device as waiting
-* */
