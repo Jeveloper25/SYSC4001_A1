@@ -78,7 +78,7 @@ int main(int argc, char** argv) {
 		int isr_duration = delays.at(duration_intr);
 		execution += std::to_string(sys_time) + ", " + std::to_string(isr_activity_time) + ", " + "ENDIO: run the ISR (device driver)\n";
 		sys_time += isr_activity_time;
-		if ((sys_time) < isr_duration) {
+		if (isr_activity_time * 2 < isr_duration) {
 			int remaining_time = (isr_duration - sys_time);
 			execution += std::to_string(sys_time) + ", " + std::to_string(remaining_time) + ", " + "check device status\n";
 			sys_time += remaining_time;
