@@ -49,7 +49,7 @@ int main(int argc, char** argv) {
 				std::cout << "Line "<< line_number << "\nInvalid device number: " << duration_intr
 				<< "\nDevice number must be between 0 and " << std::min(delays.size(), vectors.size()) << std::endl;
 		}
-		auto p = intr_boilerplate(sys_time, duration_intr, CONTEXT_TIME, vectors); 
+		auto p = intr_boilerplate(sys_time, duration_intr, save_restore_context_time, vectors); 
 		execution += std::get<0>(p);
 		sys_time = std::get<1>(p);
 		int isr_duration = delays.at(duration_intr);
@@ -73,18 +73,18 @@ int main(int argc, char** argv) {
 				std::cout << "Line "<< line_number << "\nInvalid device number: " << duration_intr
 				<< "\nDevice number must be between 0 and " << std::min(delays.size(), vectors.size()) << std::endl;
 		}
-		auto p = intr_boilerplate(sys_time, duration_intr, CONTEXT_TIME, vectors); 
+		auto p = intr_boilerplate(sys_time, duration_intr, save_restore_context_time, vectors); 
 		execution += std::get<0>(p);
 		sys_time = std::get<1>(p);
 		int isr_duration = delays.at(duration_intr);
-		execution += std::to_string(sys_time) + ", " + std::to_string(isr_activity_time) + ", " + "\n";
+		execution += std::to_string(sys_time) + ", " + std::to_string(isr_activity_time) + ", " + "run the ISR (device driver)\n";
 		sys_time += isr_activity_time;
-		execution += std::to_string(sys_time) + ", " + std::to_string(isr_activity_time) + ", " + "\n";
+		execution += std::to_string(sys_time) + ", " + std::to_string(isr_activity_time) + ", " + "transfer data from device to memory\n";
 		sys_time += isr_activity_time;
-		execution += std::to_string(sys_time) + ", " + std::to_string(isr_activity_time) + ", " + "Check for errors\n";
+		execution += std::to_string(sys_time) + ", " + std::to_string(isr_activity_time) + ", " + "check for errors\n";
 		sys_time += isr_activity_time;
 		execution += std::to_string(sys_time) + ", " + std::to_string(set_step_value) + ", " + "IRET\n";
-		sys_time+= set_step_value;
+		sys_time++;
 	} else {
 		std::cout << "Line: " << line_number << "\nInvalid activity: " << activity
 		<< "\nActivity must be one of 'CPU', 'SYSCALL', or 'END_IO." << std::endl;
