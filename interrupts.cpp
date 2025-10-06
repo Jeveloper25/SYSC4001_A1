@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
 		execution += std::to_string(sys_time) + ", " + std::to_string(isr_activity_time) + ", " + "transfer data from device to memory\n";
 		sys_time += isr_activity_time;
 		if (3 * isr_activity_time < isr_duration) {
-			int remaining_time = isr_duration - 2 * isr_activity_time;
+			int remaining_time = (isr_duration - isr_activity_time);
 			execution += std::to_string(sys_time) + ", " + std::to_string(remaining_time) + ", " + "check for errors\n";
 			sys_time += remaining_time;
 		} else {
