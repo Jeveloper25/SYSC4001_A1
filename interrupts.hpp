@@ -15,11 +15,6 @@
 #define ADDR_BASE   0
 #define VECTOR_SIZE 2
 
-#define CPU_SPEED   100
-#define MEM_LIMIT   1
-#define CONTEXT_TIME 10
-#define ISR_ACTIVITY 40
-
 /**
  * \brief parse the CLI arguments
  *
