@@ -25,6 +25,11 @@ int main(int argc, char** argv) {
     /******************ADD YOUR VARIABLES HERE*************************/
 
 	int sys_time = 0;
+	int isr_time = 40;
+	int save_restore_context_time = 10;
+	int set_step_value = 1;
+	/*set_step_value is used for mode switching, memory start calculation,
+	getting ISR address, and IRET execution*/
 	std::string type;
 	unsigned int line_number = 1;
 	
