@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
     /******************ADD YOUR VARIABLES HERE*************************/
 
 	int sys_time = 0;
-	int isr_time = 40;
+	int isr_activity_time = 40;
 	int save_restore_context_time = 10;
 	int set_step_value = 1;
 	/*set_step_value is used for mode switching, memory start calculation,
@@ -69,10 +69,22 @@ int main(int argc, char** argv) {
 		execution += std::to_string(sys_time) + ", " + std::to_string(1) + ", " + "IRET\n";
 		sys_time++;
 	} else if (activity.compare("END_IO") == 0) {
+		if (duration_intr >= std::min(delays.size(), vectors.size()) || duration_intr < 0) {
+				std::cout << "Line "<< line_number << "\nInvalid device number: " << duration_intr
+				<< "\nDevice number must be between 0 and " << std::min(delays.size(), vectors.size()) << std::endl;
+		}
 		auto p = intr_boilerplate(sys_time, duration_intr, CONTEXT_TIME, vectors); 
 		execution += std::get<0>(p);
 		sys_time = std::get<1>(p);
-		execution += "N/A, N/A, Placeholder\n";
+		int isr_duration = delays.at(duration_intr);
+		execution += std::to_string(sys_time) + ", " + std::to_string(isr_activity_time) + ", " + "\n";
+		sys_time += isr_activity_time;
+		execution += std::to_string(sys_time) + ", " + std::to_string(isr_activity_time) + ", " + "\n";
+		sys_time += isr_activity_time;
+		execution += std::to_string(sys_time) + ", " + std::to_string(isr_activity_time) + ", " + "Check for errors\n";
+		sys_time += isr_activity_time;
+		execution += std::to_string(sys_time) + ", " + std::to_string(set_step_value) + ", " + "IRET\n";
+		sys_time+= set_step_value;
 	} else {
 		std::cout << "Line: " << line_number << "\nInvalid activity: " << activity
 		<< "\nActivity must be one of 'CPU', 'SYSCALL', or 'END_IO." << std::endl;
@@ -88,3 +100,11 @@ int main(int argc, char** argv) {
 
     return 0;
 }
+
+/*
+* The times are organized as follows:
+* 0: Check device status
+* 1: Call device driver
+* 2: Initiate DMA transfer 
+* 3: Mark device as waiting
+* */
