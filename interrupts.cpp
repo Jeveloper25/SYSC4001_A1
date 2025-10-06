@@ -79,7 +79,7 @@ int main(int argc, char** argv) {
 		execution += std::to_string(sys_time) + ", " + std::to_string(isr_activity_time) + ", " + "ENDIO: run the ISR (device driver)\n";
 		sys_time += isr_activity_time;
 		if (isr_activity_time * 2 < isr_duration) {
-			int remaining_time = (isr_duration - sys_time);
+			int remaining_time = (isr_duration - isr_activity_time);
 			execution += std::to_string(sys_time) + ", " + std::to_string(remaining_time) + ", " + "check device status\n";
 			sys_time += remaining_time;
 		} else {
@@ -103,11 +103,3 @@ int main(int argc, char** argv) {
 
     return 0;
 }
-
-/*
-* The times are organized as follows:
-* 0: Check device status
-* 1: Call device driver
-* 2: Initiate DMA transfer 
-* 3: Mark device as waiting
-* */
