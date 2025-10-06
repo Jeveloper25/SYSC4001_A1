@@ -53,19 +53,18 @@ int main(int argc, char** argv) {
 		execution += std::get<0>(p);
 		sys_time = std::get<1>(p);
 		int isr_duration = delays.at(duration_intr);
-		int isr_times[4];
-		isr_times[0] = std::round(isr_duration * 0.1);
-		isr_times[1] = std::round(isr_duration * 0.2);
-		isr_times[2] = std::round(isr_duration * 0.4);
-		isr_times[3] = std::round(isr_duration * 0.3);
-		execution += std::to_string(sys_time) + ", " + std::to_string(isr_times[0]) + ", " + "Check device status\n";
-		sys_time += isr_times[0];
-		execution += std::to_string(sys_time) + ", " + std::to_string(isr_times[1]) + ", " + "Call device driver\n";
-		sys_time += isr_times[1];
-		execution += std::to_string(sys_time) + ", " + std::to_string(isr_times[2]) + ", " + "Initiate DMA transfer\n";
-		sys_time += isr_times[2];
-		execution += std::to_string(sys_time) + ", " + std::to_string(isr_times[3]) + ", " + "Mark device as waiting\n";
-		sys_time += isr_times[3];
+		execution += std::to_string(sys_time) + ", " + std::to_string(isr_activity_time) + ", " + "SYSCALL: run the ISR (device driver)\n";
+		sys_time += isr_activity_time;
+		execution += std::to_string(sys_time) + ", " + std::to_string(isr_activity_time) + ", " + "transfer data from device to memory\n";
+		sys_time += isr_activity_time;
+		if (3 * isr_activity_time < isr_duration) {
+			int remaining_time = isr_duration - 2 * isr_activity_time;
+			execution += std::to_string(sys_time) + ", " + std::to_string(remaining_time) + ", " + "check for errors\n";
+			sys_time += remaining_time;
+		} else {
+			execution += std::to_string(sys_time) + ", " + std::to_string(isr_activity_time) + ", " + "check for errors\n";
+			sys_time += isr_activity_time;
+		}
 		execution += std::to_string(sys_time) + ", " + std::to_string(1) + ", " + "IRET\n";
 		sys_time++;
 	} else if (activity.compare("END_IO") == 0) {
