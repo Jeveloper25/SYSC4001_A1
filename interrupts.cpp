@@ -45,14 +45,15 @@ int main(int argc, char** argv) {
 		execution += std::to_string(sys_time) + ", " + std::to_string(duration_intr) + ", " + type;
 		sys_time += duration_intr;
 	} else if (activity.compare("SYSCALL") == 0){
-		if (duration_intr >= std::min(delays.size(), vectors.size()) || duration_intr < 0) {
-				std::cout << "Line "<< line_number << "\nInvalid device number: " << duration_intr
+		int device_number = duration_intr - 1;
+		if (device_number >= std::min(delays.size(), vectors.size()) || device_number< 0) {
+				std::cout << "Line "<< line_number << "\nInvalid device number: " << device_number
 				<< "\nDevice number must be between 0 and " << std::min(delays.size(), vectors.size()) << std::endl;
 		}
-		auto p = intr_boilerplate(sys_time, duration_intr, save_restore_context_time, vectors); 
+		auto p = intr_boilerplate(sys_time, device_number, save_restore_context_time, vectors); 
 		execution += std::get<0>(p);
 		sys_time = std::get<1>(p);
-		int isr_duration = delays.at(duration_intr);
+		int isr_duration = delays.at(device_number);
 		execution += std::to_string(sys_time) + ", " + std::to_string(isr_activity_time) + ", " + "SYSCALL: run the ISR (device driver)\n";
 		sys_time += isr_activity_time;
 		execution += std::to_string(sys_time) + ", " + std::to_string(isr_activity_time) + ", " + "transfer data from device to memory\n";
@@ -68,14 +69,15 @@ int main(int argc, char** argv) {
 		execution += std::to_string(sys_time) + ", " + std::to_string(1) + ", " + "IRET\n";
 		sys_time++;
 	} else if (activity.compare("END_IO") == 0) {
-		if (duration_intr >= std::min(delays.size(), vectors.size()) || duration_intr < 0) {
-				std::cout << "Line "<< line_number << "\nInvalid device number: " << duration_intr
+		int device_number = duration_intr - 1;
+		if (device_number >= std::min(delays.size(), vectors.size()) || device_number < 0) {
+				std::cout << "Line "<< line_number << "\nInvalid device number: " << device_number
 				<< "\nDevice number must be between 0 and " << std::min(delays.size(), vectors.size()) << std::endl;
 		}
-		auto p = intr_boilerplate(sys_time, duration_intr, save_restore_context_time, vectors); 
+		auto p = intr_boilerplate(sys_time, device_number, save_restore_context_time, vectors); 
 		execution += std::get<0>(p);
 		sys_time = std::get<1>(p);
-		int isr_duration = delays.at(duration_intr);
+		int isr_duration = delays.at(device_number);
 		execution += std::to_string(sys_time) + ", " + std::to_string(isr_activity_time) + ", " + "ENDIO: run the ISR (device driver)\n";
 		sys_time += isr_activity_time;
 		if (isr_activity_time * 2 < isr_duration) {
